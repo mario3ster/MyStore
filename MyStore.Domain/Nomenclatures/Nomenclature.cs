@@ -2,19 +2,33 @@ namespace MyStore.Domain.Nomenclatures
 {
     using System;
     using System.Collections.Generic;
+    using System.Linq;
 
-    public class Nomenclature<T>
+    public class Nomenclature<T> where T : INomenclatureUnit
     {
-        public ICollection<T> Entities { get; private set; }
+        private ICollection<T> entities;
 
         public Nomenclature()
         {
-            Entities = new List<T>();
+            entities = new List<T>();
         }
 
         public void Add(T item)
         {
-            Entities.Add(item);
+            entities.Add(item);
+        }
+
+        public long Count 
+        { 
+            get 
+            {
+                return entities.Count;
+            }
+        }
+
+        public T GetByCode(string code)
+        {
+            return entities.Where(item => item.Code == code).First();
         }
     }
 }

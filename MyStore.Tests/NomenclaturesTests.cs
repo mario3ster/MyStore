@@ -3,6 +3,7 @@ namespace MyStore.Tests.Nomenclatures
     using System;
     using NUnit.Framework;
     using MyStore.Domain.Nomenclatures;
+    using System.Linq;
 
     public class NomenclaturesTests
     {
@@ -12,29 +13,26 @@ namespace MyStore.Tests.Nomenclatures
         }
 
         [Test]
-        public void CheckIfCanAddItemToNewNumenclature()
+        public void When_AddNewItem_Expect_ToBePersisted()
         {
             // Arrange
             var items = new Nomenclature<Item>(); 
 
             var item = new Item { 
-                Id = 1,
-                Name = "Item 1", 
-                Code = "x1001",
+                Name = "Yogurt", 
+                Code = "yog101",
                 Barcode = "123456789",
                 Description = "Desc", 
-                Picture = "", 
-                CategoryID = 1,
-                Priority = 1,
-                SuppliersId = new int[] { 1, 2, 3 }, 
-                IsDeleted = false
+                Brand = "Danone", 
+                Picture = ""
             };
 
             // Act
             items.Add(item);
 
             //Assert
-            Assert.AreEqual(items.Entities.Count, 1);
+            Assert.AreEqual(items.Count, 1);
+            Assert.AreEqual(item, items.GetByCode("yog101"));
         }
     
         [Test]
@@ -56,7 +54,7 @@ namespace MyStore.Tests.Nomenclatures
             stores.Add(store);
 
             //Assert
-            Assert.AreEqual(stores.Entities.Count, 1);
+            Assert.AreEqual(stores.Count, 1);
         }
 
         [Test]
@@ -77,7 +75,7 @@ namespace MyStore.Tests.Nomenclatures
             suppliers.Add(supplier);
 
             //Assert
-            Assert.AreEqual(suppliers.Entities.Count, 1);
+            Assert.AreEqual(suppliers.Count, 1);
         }
     }
 }
