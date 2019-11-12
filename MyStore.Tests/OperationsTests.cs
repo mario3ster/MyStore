@@ -9,33 +9,30 @@ namespace MyStore.Tests.Operations
 
     public class OperationsTests
     {
-        private ISupplier GetSupplier()
+        private Supplier GetSupplier()
         {
             return new Supplier()
-            {
-                Id = 88718,
+            {             
                 Name = "Milky Foods Ltd",
                 Address = "London, strImaginary str.3",
                 Phone = "0991819912"
             };
         }
 
-        private IStore GetStore()
+        private Store GetStore()
         {
             return new Store()
-            {
-                Id = 88718,
+            {             
                 Name = "Store One",
                 Address = "London, Temza str. 43",
                 Phone = "34545555544"
             };
         }
 
-        private IUser GetUser()
+        private User GetUser()
         {
              return new User()
-            {
-                Id = 88718,
+            {                
                 Name = "OperatorOne",
                 Email = "operator@gmail.com"
             };
