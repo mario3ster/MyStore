@@ -12,9 +12,9 @@ namespace MyStore.Domain.Operations
         }
 
         public Supply Supply { get; set; }
-        public IUser Operator { get; set; }
-        public IStore Store { get; set; }
-        public ISupplier Supplier { get; set; }
+        public User Operator { get; set; }
+        public Store Store { get; set; }
+        public Supplier Supplier { get; set; }
         public IPayment Payment { get; set; }
     }
 }

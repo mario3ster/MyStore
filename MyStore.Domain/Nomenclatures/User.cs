@@ -1,13 +1,11 @@
 namespace MyStore.Domain.Nomenclatures
 {
-    public class User : IUser
+    public class User : NomenclatureEntity
     {
 
-        public int Id { get; set; }
-        public string Name { get; set; }
         public string Email { get; set; }
-        public string Username { get; set; }
-        public string Password { get; set; }
-        public bool IsDeleted { get; set; }
+        public virtual string Username { get; set; }
+        public virtual string Password { get; set; } 
+        public virtual string Role { get; set; }   
     }
 }
