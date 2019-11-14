@@ -4,6 +4,9 @@ namespace MyStore.Tests.Nomenclatures
     using MyStore.Domain.Nomenclatures;
     using MyStore.Tests.Utilities;
     using System.Linq;
+    using System.Collections.Generic;
+    using MyStore.Domain.Exceptions;
+    using System;
 
     public class NomenclaturesTests
     {
@@ -30,42 +33,54 @@ namespace MyStore.Tests.Nomenclatures
 
         [Test]
         public void When_AddCoupleOfItems_Expect_ToGetThemBackOrdered()
-        {
-            // Arrange
+        {            
             var nom = new Nomenclature<Item>();             
             var items = NomenclatureEntityGenerator<Item>.GenerateMany(3).Select(x => x).ToList();
-
-            // Act            
+         
             nom.AddMany(items);
 
-            //Assert
             byte numberOfItemsGenerated = 3;
-            var nomenclatureEntities = nom.GetEntities((0, numberOfItemsGenerated));
+            ICollection<Item> nomenclatureEntities = nom.GetEntities((0, numberOfItemsGenerated));
 
             Assert.AreEqual(nomenclatureEntities.Count, numberOfItemsGenerated);
 
             for (int i = 1; i < numberOfItemsGenerated; i++)
             {
                 Assert.Less(nomenclatureEntities.ElementAt(i - 1).Priority, nomenclatureEntities.ElementAt(i).Priority);
-            }
-            
+            }            
         }
 
          [Test]
-        public void When_HasLogicallyDeletedItems_Expect_ToBeOutOfScope()
+        public void When_IDeleteItem_Expect_ToBeOutOfScope()
         {
-            // Arrange
             var nomenclature = new Nomenclature<Item>();             
             var items = NomenclatureEntityGenerator<Item>.GenerateMany(5).Select(x => x).ToList();
-                       
-            // Act            
+                               
             nomenclature.AddMany(items);
             nomenclature.DeleteItem(items.Last().Code);
-
-            //Assert            
+       
             Assert.AreEqual(nomenclature.Count, 4);
         }
     
+        [Test]
+        public void When_AddDuplicateEntities_Expect_DuplicateNomenclatureEntityException()
+        {
+            var nomenclature = new Nomenclature<Item>();             
+            var item = NomenclatureEntityGenerator<Item>.GenerateOne();
+                                 
+            nomenclature.Add(item);            
+        
+            Assert.Catch(typeof(DuplicateNomenclatureEntityException), () => nomenclature.Add(item));
+        }
+
+        [Test]
+        public void When_TryToGetEntityByNullCode_Expect_ArgumentException()
+        {
+            var nomenclature = new Nomenclature<Item>();            
+        
+            Assert.Catch(typeof(ArgumentException), () => nomenclature.GetByCode(null));
+        }
+
         [Test]
         public void When_AddNewSupplier_Expect_ToBePersisted()
         {
@@ -89,7 +104,6 @@ namespace MyStore.Tests.Nomenclatures
 
             var numUnitsInNomenclature = suppliers.GetEntities((0, 4)).Count;
             Assert.AreEqual(numUnitsInNomenclature, 4);
-        }
-    
+        }    
     }
 }

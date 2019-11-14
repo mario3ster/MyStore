@@ -3,6 +3,7 @@ namespace MyStore.Domain.Nomenclatures
     using System;
     using System.Collections.Generic;
     using System.Linq;
+    using MyStore.Domain.Exceptions;
 
     public class Nomenclature<TEntity> where TEntity : NomenclatureEntity
     {
@@ -23,6 +24,13 @@ namespace MyStore.Domain.Nomenclatures
 
         public void Add(TEntity item)
         {
+            var entity = Entities.Where(unit => unit.GetHashCode() == item.GetHashCode()).FirstOrDefault();
+
+            if(entity != null)
+            {
+                throw new DuplicateNomenclatureEntityException();
+            }
+
             entities.Add(item);
         }
 
@@ -44,7 +52,19 @@ namespace MyStore.Domain.Nomenclatures
 
         public TEntity GetByCode(string code)
         {
-            return Entities.Where(unit => unit.Code == code).First();
+            if(code is null)
+            {
+                throw new ArgumentException ("Nomenclature item code is required.");
+            }
+
+            TEntity foundEntity = Entities.Where(unit => unit.Code == code).FirstOrDefault();
+
+            if(foundEntity is null) 
+            {
+                throw new ArgumentException("There is no entity with specified code in the nomenclature");
+            }
+
+            return foundEntity;
         }
 
         public ICollection<TEntity> GetEntities((int start, int end) range)
@@ -57,12 +77,7 @@ namespace MyStore.Domain.Nomenclatures
 
         public void DeleteItem(string code)
         {
-            var entity = this.GetByCode(code);
-
-            if(entity is null) 
-            {
-                throw new ArgumentException("There is no entity with this code in the nomenclature");
-            }
+            var entity = this.GetByCode(code);            
 
             entity.IsDeleted = true;
         }

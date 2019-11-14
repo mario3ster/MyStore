@@ -2,7 +2,6 @@ namespace MyStore.Tests.Utilities
 {
     using System;
     using System.Collections.Generic;
-    using System.Linq;
     using MyStore.Domain.Nomenclatures;
 
     internal static class NomenclatureEntityGenerator<TEntity> where TEntity : NomenclatureEntity, new()
