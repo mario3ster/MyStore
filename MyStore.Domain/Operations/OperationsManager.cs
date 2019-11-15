@@ -30,29 +30,5 @@ namespace MyStore.Domain.Operations
         {
             return executedOperation.Commit(store, opDescriptor);                        
         }
-    }
-
-    /// Represents ID of new commited operation
-    public class OpCode
-    {        
-        private readonly object value;
-
-        public OpCode(int value)
-        {
-            this.value = value;
-        }
-
-        public OpCode(Guid value)
-        {
-            this.value = value;
-        }
-
-        public object StatusCode 
-        { 
-            get
-            {
-                return value;
-            }
-        }
-    }
+    }   
 }
