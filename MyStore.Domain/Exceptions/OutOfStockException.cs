@@ -1,10 +1,10 @@
-using System;
-using System.Runtime.Serialization;
-
 namespace MyStore.Domain.Exceptions
 {
+    using System;
+    using System.Runtime.Serialization;
+    
     [Serializable]
-    internal class OutOfStockException : ApplicationException
+    public class OutOfStockException : ApplicationException
     {
         public OutOfStockException()
         {

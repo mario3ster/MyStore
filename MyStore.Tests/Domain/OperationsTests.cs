@@ -1,4 +1,4 @@
-namespace MyStore.Tests.Operations
+namespace MyStore.Tests.Domain.Operations
 {
     using NUnit.Framework;
     using MyStore.Domain.Nomenclatures;
@@ -7,61 +7,6 @@ namespace MyStore.Tests.Operations
 
     public class OperationsTests
     {
-        // private Supplier GetSupplier()
-        // {
-        //     return new Supplier()
-        //     {             
-        //         Name = "Milky Foods Ltd",
-        //         Address = "London, strImaginary str.3",
-        //         Phone = "0991819912"
-        //     };
-        // }
-
-        // private Store GetStore()
-        // {
-        //     return new Store()
-        //     {             
-        //         Name = "Store One",
-        //         Address = "London, Temza str. 43",
-        //         Phone = "34545555544"
-        //     };
-        // }
-
-        // private User GetUser()
-        // {
-        //      return new User()
-        //     {                
-        //         Name = "OperatorOne",
-        //         Email = "operator@gmail.com"
-        //     };
-        // }
-
-        // private Supply GetSupply()
-        // {
-        //      var yogurt = new SupplyItem()
-        //     {
-        //         ItemId = 1,
-        //         Qtty = 100,
-        //         Measure = Measure.Qtty,
-        //         UnitPrice = 0.75m,
-        //         Currency = "BGN"
-        //     };
-
-        //     var mozzarela = new SupplyItem()
-        //     {
-        //         ItemId = 2,
-        //         Qtty = 50,
-        //         Measure = Measure.Qtty,
-        //         UnitPrice = 1.45m,
-        //         Currency = "BGN"
-        //     };
-
-        //     return new Supply()
-        //     {
-        //         Items = new SupplyItem[] { yogurt, mozzarela }
-        //     };
-        // }
-
         [Test]
         public void When_DeliveringItems_Expect_ToHaveThemInStock()
         {
@@ -93,12 +38,12 @@ namespace MyStore.Tests.Operations
                                 }
                             };
             var opDescriptor = new DeliveryOperationDescriptor(supplierCode, deliveredItems);
-            IOperation operation = opManager.CreateOperation(opDescriptor);
+            IActiveOperation operation = opManager.CreateOperation(opDescriptor);
             var opCode = opManager.CommitOperation();
         
             Assert.NotNull(opCode);
-            Assert.AreEqual(store.CheckAvailability(itemCodes[0]), 120);
-            Assert.AreEqual(store.CheckAvailability(itemCodes[1]), 50);
+            Assert.AreEqual(120, store.CheckAvailability(itemCodes[0]));
+            Assert.AreEqual(50, store.CheckAvailability(itemCodes[1]));
         }
 
         [Test]
@@ -136,24 +81,12 @@ namespace MyStore.Tests.Operations
                             };
 
             var opDescriptor = new SaleOperationDescriptor(soldItems);
-            IOperation operation = opManager.CreateOperation(opDescriptor);
+            IActiveOperation operation = opManager.CreateOperation(opDescriptor);
             var opCode = opManager.CommitOperation();
         
             Assert.NotNull(opCode);
-            Assert.AreEqual(store.CheckAvailability(itemCodes[0]), 98);
-            Assert.AreEqual(store.CheckAvailability(itemCodes[1]), 96);
+            Assert.AreEqual(98, store.CheckAvailability(itemCodes[0]));
+            Assert.AreEqual(96, store.CheckAvailability(itemCodes[1]));
         }
-
-        // [Test]
-        // public void CheckIfCanMakePayment()
-        // {
-        //     var payment = new Payment(10.45m, "BGN", Sign.Plus);
-        //     var cashDesk = new CashDesk();
-
-        //     int paymentId = cashDesk.CommitPayment();
-
-        //     cashDesk
-        // }
-
     }
 }

@@ -1,30 +1,28 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Projects\\MyStore\\MyStore.Backend\\MyStore.Backend.csproj": {}
+    "C:\\Users\\mangelov3\\Projects\\MyStore\\MyStore\\MyStore.Backend\\MyStore.Backend.csproj": {}
   },
   "projects": {
-    "C:\\Projects\\MyStore\\MyStore.Backend\\MyStore.Backend.csproj": {
+    "C:\\Users\\mangelov3\\Projects\\MyStore\\MyStore\\MyStore.Backend\\MyStore.Backend.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Projects\\MyStore\\MyStore.Backend\\MyStore.Backend.csproj",
+        "projectUniqueName": "C:\\Users\\mangelov3\\Projects\\MyStore\\MyStore\\MyStore.Backend\\MyStore.Backend.csproj",
         "projectName": "MyStore.Backend",
-        "projectPath": "C:\\Projects\\MyStore\\MyStore.Backend\\MyStore.Backend.csproj",
-        "packagesPath": "C:\\Users\\Galaxy\\.nuget\\packages\\",
-        "outputPath": "C:\\Projects\\MyStore\\MyStore.Backend\\obj\\",
+        "projectPath": "C:\\Users\\mangelov3\\Projects\\MyStore\\MyStore\\MyStore.Backend\\MyStore.Backend.csproj",
+        "packagesPath": "C:\\Users\\mangelov3\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\mangelov3\\Projects\\MyStore\\MyStore\\MyStore.Backend\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
         ],
         "configFilePaths": [
-          "C:\\Users\\Galaxy\\AppData\\Roaming\\NuGet\\NuGet.Config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+          "C:\\Users\\mangelov3\\AppData\\Roaming\\NuGet\\NuGet.Config"
         ],
         "originalTargetFrameworks": [
           "netcoreapp3.0"
         ],
         "sources": {
-          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {

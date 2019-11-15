@@ -1,4 +1,4 @@
-namespace MyStore.Tests.Nomenclatures
+namespace MyStore.Tests.Domain.Nomenclatures
 {
     using NUnit.Framework;
     using MyStore.Domain.Nomenclatures;
@@ -27,7 +27,7 @@ namespace MyStore.Tests.Nomenclatures
 
             //Assert
             var itemCode = item.Code;
-            Assert.AreEqual(items.Count, 1);
+            Assert.AreEqual(1, items.Count);
             Assert.AreEqual(item, items.GetByCode(itemCode));
         }
 
@@ -59,7 +59,7 @@ namespace MyStore.Tests.Nomenclatures
             nomenclature.AddMany(items);
             nomenclature.DeleteItem(items.Last().Code);
        
-            Assert.AreEqual(nomenclature.Count, 4);
+            Assert.AreEqual(4, nomenclature.Count);
         }
     
         [Test]
@@ -90,7 +90,7 @@ namespace MyStore.Tests.Nomenclatures
             suppliers.Add(supplier);
          
             string supplierCode = supplier.Code;
-            Assert.AreEqual(suppliers.Count, 1);
+            Assert.AreEqual(1, suppliers.Count);
             Assert.AreEqual(supplier, suppliers.GetByCode(supplierCode));
         }
 
@@ -103,7 +103,18 @@ namespace MyStore.Tests.Nomenclatures
             suppliers.AddMany(suppliersList);
 
             var numUnitsInNomenclature = suppliers.GetEntities((0, 4)).Count;
-            Assert.AreEqual(numUnitsInNomenclature, 4);
-        }    
+            Assert.AreEqual(4, numUnitsInNomenclature);
+        }
+
+        [Test]
+        public void When_TryToTakeOutFromWarehouseMoreThanAvailable_Expect_Exception()
+        {
+            String itemCode = "item501.5";
+            IStore store = new Store("store02");
+
+            store.AddToWarehouse(itemCode, 100); 
+
+            Assert.Catch(typeof(OutOfStockException), () => store.TakeOutOfWarehouse(itemCode, 101));
+        }
     }
 }

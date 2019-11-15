@@ -13,9 +13,9 @@ namespace MyStore.Domain.Nomenclatures
             public int Qtty { get; set; }
         }
 
-        private List<ItemInStock> itemsInStocks;
+        private readonly List<ItemInStock> itemsInStocks;
 
-        private string storeCode;
+        private readonly string storeCode;
 
         public Store(string storeCode)
         {
@@ -50,7 +50,7 @@ namespace MyStore.Domain.Nomenclatures
 
             if(inStock.Qtty < qtty)
             {            
-                throw new OutOfStockException("Not enough entities for item: " + inStock.ItemCode);
+                throw new OutOfStockException(string.Format("Not sufficient quantity for Item with code {0}", inStock.ItemCode));
             }
 
             inStock.Qtty -= qtty;

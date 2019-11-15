@@ -8,7 +8,8 @@ using Microsoft.Extensions.Logging;
 namespace MyStore.Backend.Controllers
 {
     [ApiController]
-    [Route("[controller]")]
+    //[Route("[controller]")]
+    [Route("wc")]
     public class WeatherForecastController : ControllerBase
     {
         private static readonly string[] Summaries = new[]

@@ -1,11 +1,8 @@
-using System;
-
 namespace MyStore.Domain.Operations
 {
-    using MyStore.Domain.Nomenclatures;
-    using MyStore.Domain.Payments;
+    using MyStore.Domain.Nomenclatures;    
 
-    public class Delivery : IOperation
+    public class Delivery : Operation, IActiveOperation
     {
         public OpCode Commit(IStore store, IOperationDescriptor descriptor)
         {

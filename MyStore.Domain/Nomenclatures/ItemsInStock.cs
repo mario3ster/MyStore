@@ -1,4 +1,0 @@
-namespace MyStore.Domain.Nomenclatures
-{
-
-}

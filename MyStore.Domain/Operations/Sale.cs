@@ -1,9 +1,9 @@
-using MyStore.Domain.Nomenclatures;
-
 namespace MyStore.Domain.Operations
 {
-    public class Sale : IOperation
-    {
+    using MyStore.Domain.Nomenclatures;
+    
+    public class Sale : Operation, IActiveOperation
+    {    
         public OpCode Commit(IStore store, IOperationDescriptor descriptor)
         {        
             foreach (var item in descriptor.Items)

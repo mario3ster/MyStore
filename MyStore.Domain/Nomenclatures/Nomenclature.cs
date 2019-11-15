@@ -7,7 +7,7 @@ namespace MyStore.Domain.Nomenclatures
 
     public class Nomenclature<TEntity> where TEntity : NomenclatureEntity
     {
-        private ICollection<TEntity> entities;
+        private readonly ICollection<TEntity> entities;
 
         private ICollection<TEntity> Entities
         {

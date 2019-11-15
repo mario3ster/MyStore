@@ -1,5 +1,6 @@
 namespace MyStore.Domain.Payments
 {
+    using System;
     using MyStore.Domain.Math;
     
     public interface IPayment
@@ -9,5 +10,7 @@ namespace MyStore.Domain.Payments
         string Curency { get; }
 
         Sign Sign { get; }
+
+        DateTime Date { get; }
     }
 }

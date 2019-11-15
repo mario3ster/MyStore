@@ -1,6 +1,8 @@
 namespace MyStore.Domain.Payments
 {
+    using System;
     using MyStore.Domain.Math;
+    using MyStore.Domain.Operations;
 
     public class Payment : IPayment
     {
@@ -8,13 +10,18 @@ namespace MyStore.Domain.Payments
 
         public string Curency { get; private set; }
 
+        public DateTime Date { get; private set; }
+
         public Sign Sign { get; private set; }
 
-        public Payment(decimal total, string curency, Sign sign)
+        public IOperation Operation { get; private set; }
+
+        public Payment(decimal total, string curency, Sign sign, IOperation operation)
         {
-            this.Total = total;
-            this.Curency = curency;
-            this.Sign = sign;
+            Total = total;
+            Curency = curency;
+            Sign = sign;
+            Operation = operation;
         }
     }
 }

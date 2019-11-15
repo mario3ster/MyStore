@@ -1,8 +1,9 @@
 namespace MyStore.Domain.Operations
 {
+    using System;
     using MyStore.Domain.Nomenclatures;
 
-    public class OperationsManager<TOperation, TOperationDescriptor> where TOperation : IOperation, new()
+    public class OperationsManager<TOperation, TOperationDescriptor> where TOperation : IActiveOperation, new()
                                                                      where TOperationDescriptor : IOperationDescriptor
     {
         private string userCode;
@@ -31,12 +32,27 @@ namespace MyStore.Domain.Operations
         }
     }
 
+    /// Represents ID of new commited operation
     public class OpCode
-    {
-        public OpCode(int statusCode)
+    {        
+        private readonly object value;
+
+        public OpCode(int value)
         {
-            StatusCode = statusCode;
+            this.value = value;
         }
-        public int StatusCode { get; private set; }
+
+        public OpCode(Guid value)
+        {
+            this.value = value;
+        }
+
+        public object StatusCode 
+        { 
+            get
+            {
+                return value;
+            }
+        }
     }
 }
