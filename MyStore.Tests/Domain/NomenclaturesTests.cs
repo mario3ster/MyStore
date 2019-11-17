@@ -16,7 +16,7 @@ namespace MyStore.Tests.Domain.Nomenclatures
         }
 
         [Test]
-        public void When_AddNewItem_Expect_ToBePersisted()
+        public void When_AddNewItem_Expect_ToHaveItInTheNomenclature()
         {
             // Arrange
             var items = new Nomenclature<Item>();             
@@ -82,7 +82,7 @@ namespace MyStore.Tests.Domain.Nomenclatures
         }
 
         [Test]
-        public void When_AddNewSupplier_Expect_ToBePersisted()
+        public void When_AddNewSupplier_Expect_ToHaveItInTheNomenclature()
         {
             var suppliers = new Nomenclature<Supplier>(); 
             var supplier = NomenclatureEntityGenerator<Supplier>.GenerateOne();

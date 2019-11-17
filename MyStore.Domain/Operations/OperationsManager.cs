@@ -3,7 +3,7 @@ namespace MyStore.Domain.Operations
     using System;
     using MyStore.Domain.Nomenclatures;
 
-    public class OperationsManager<TOperation, TOperationDescriptor> where TOperation : IActiveOperation, new()
+    public class OperationsManager<TOperation, TOperationDescriptor> where TOperation : Operation, new()
                                                                      where TOperationDescriptor : IOperationDescriptor
     {
         private string userCode;
@@ -28,7 +28,10 @@ namespace MyStore.Domain.Operations
 
         public OpCode CommitOperation()
         {
-            return executedOperation.Commit(store, opDescriptor);                        
+            executedOperation.UpdateStore();
+            // To do: call Abstract Persistense API to save operation 
+            
+            return new OpCode(1);               
         }
     }   
 }

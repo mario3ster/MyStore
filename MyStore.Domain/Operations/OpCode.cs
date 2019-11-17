@@ -2,7 +2,7 @@ namespace MyStore.Domain.Operations
 {
     using System;
     
-     /// Represents abstract identifier wrapper
+     /// Represents abstract app identifier
     public class OpCode
     {        
         private readonly object value;
@@ -17,7 +17,7 @@ namespace MyStore.Domain.Operations
             this.value = value;
         }
 
-        public object StatusCode 
+        public virtual object Value 
         { 
             get
             {

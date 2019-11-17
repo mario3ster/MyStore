@@ -14,14 +14,14 @@ namespace MyStore.Domain.Payments
 
         public Sign Sign { get; private set; }
 
-        public IOperation Operation { get; private set; }
+        public OpCode OperationCode { get; private set; }
 
-        public Payment(decimal total, string curency, Sign sign, IOperation operation)
+        public Payment(decimal total, string curency, Sign sign, OpCode operationCode)
         {
             Total = total;
             Curency = curency;
             Sign = sign;
-            Operation = operation;
+            OperationCode = operationCode;
         }
     }
 }

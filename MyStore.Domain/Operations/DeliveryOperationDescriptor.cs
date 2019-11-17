@@ -1,17 +1,20 @@
 namespace MyStore.Domain.Operations
 {
     using System.Collections.Generic;
+    using MyStore.Domain.Nomenclatures;
 
-    public class DeliveryOperationDescriptor : IOperationDescriptor
+    public class DeliveryOperationDescriptor : OperationDescriptor
     {
-        private string supplierCode;
+        private ISupplier supplier;
 
-        public DeliveryOperationDescriptor(string supplierCode, ICollection<OperationalItem> items)
+        public DeliveryOperationDescriptor(
+            ISupplier supplier, 
+            IStore store, 
+            IUser user, 
+            ICollection<OperationalItem> items) 
+            : base (store, user, items)
         {
-            this.supplierCode = supplierCode;
-            this.Items = items;
-        }
-
-        public ICollection<OperationalItem> Items { get; private set; }       
+            this.supplier = supplier;
+        }  
     }
 }

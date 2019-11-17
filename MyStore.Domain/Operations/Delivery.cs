@@ -2,16 +2,21 @@ namespace MyStore.Domain.Operations
 {
     using MyStore.Domain.Nomenclatures;    
 
-    public class Delivery : Operation, IActiveOperation
+    public class Delivery : Operation
     {
-        public OpCode Commit(IStore store, IOperationDescriptor descriptor)
-        {
-            foreach (var item in descriptor.Items)
+        public ISupplier Supplier { get; set; }
+
+       public Delivery(IOperationDescriptor opDescriptor)
+            : base(opDescriptor)
+       {
+       }
+
+       public override void UpdateStore()
+       {
+            foreach (var item in base.OperationDescriptor.Items)
             {
-                 store.AddToWarehouse(item.Code, item.Qtty);
+                 base.OperationDescriptor.Store.AddToWarehouse(item.Code, item.Qtty);
             }
-           
-           return new OpCode(1);
-        }
+       }
     }
 }

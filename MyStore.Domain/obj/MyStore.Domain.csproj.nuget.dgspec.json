@@ -1,28 +1,30 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\mangelov3\\Projects\\MyStore\\MyStore\\MyStore.Domain\\MyStore.Domain.csproj": {}
+    "C:\\Projects\\MyStore\\MyStore\\MyStore.Domain\\MyStore.Domain.csproj": {}
   },
   "projects": {
-    "C:\\Users\\mangelov3\\Projects\\MyStore\\MyStore\\MyStore.Domain\\MyStore.Domain.csproj": {
+    "C:\\Projects\\MyStore\\MyStore\\MyStore.Domain\\MyStore.Domain.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\mangelov3\\Projects\\MyStore\\MyStore\\MyStore.Domain\\MyStore.Domain.csproj",
+        "projectUniqueName": "C:\\Projects\\MyStore\\MyStore\\MyStore.Domain\\MyStore.Domain.csproj",
         "projectName": "MyStore.Domain",
-        "projectPath": "C:\\Users\\mangelov3\\Projects\\MyStore\\MyStore\\MyStore.Domain\\MyStore.Domain.csproj",
-        "packagesPath": "C:\\Users\\mangelov3\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\mangelov3\\Projects\\MyStore\\MyStore\\MyStore.Domain\\obj\\",
+        "projectPath": "C:\\Projects\\MyStore\\MyStore\\MyStore.Domain\\MyStore.Domain.csproj",
+        "packagesPath": "C:\\Users\\Galaxy\\.nuget\\packages\\",
+        "outputPath": "C:\\Projects\\MyStore\\MyStore\\MyStore.Domain\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
         ],
         "configFilePaths": [
-          "C:\\Users\\mangelov3\\AppData\\Roaming\\NuGet\\NuGet.Config"
+          "C:\\Users\\Galaxy\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
           "netstandard2.0"
         ],
         "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {

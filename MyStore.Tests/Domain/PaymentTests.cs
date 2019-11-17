@@ -13,10 +13,10 @@ namespace MyStore.Tests.Domain.Operations
         {
             IPayment[] payments = new Payment[] 
             {
-                new Payment(200.00M, "BGN", Sign.Plus, new Sale()), 
-                new Payment(450.00M, "BGN", Sign.Plus, new Sale()), 
-                new Payment(1100.00M, "BGN", Sign.Plus, new Sale()), 
-                new Payment(550.00M, "BGN", Sign.Minus, new Delivery())
+                new Payment(200.00M, "BGN", Sign.Plus, new OpCode(1)), 
+                new Payment(450.00M, "BGN", Sign.Plus, new OpCode(2)), 
+                new Payment(1100.00M, "BGN", Sign.Plus, new OpCode(3)), 
+                new Payment(550.00M, "BGN", Sign.Minus, new OpCode(4))
             }; 
 
             var cashier = new Cashier();
@@ -34,9 +34,9 @@ namespace MyStore.Tests.Domain.Operations
         {
             IPayment[] payments = new Payment[] 
             {
-                new Payment(220.00M, "BGN", Sign.Plus, new Sale()), 
-                new Payment(329.00M, "BGN", Sign.Plus, new Sale()), 
-                new Payment(550.00M, "BGN", Sign.Minus, new Delivery())
+                new Payment(220.00M, "BGN", Sign.Plus, new OpCode(1)), 
+                new Payment(329.00M, "BGN", Sign.Plus, new OpCode(2)), 
+                new Payment(550.00M, "BGN", Sign.Minus, new OpCode(3))
             }; 
 
             var cashier = new Cashier();

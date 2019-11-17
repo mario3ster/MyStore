@@ -1,14 +1,15 @@
 using System.Collections.Generic;
+using MyStore.Domain.Nomenclatures;
 
 namespace MyStore.Domain.Operations
 {
-    public class SaleOperationDescriptor : IOperationDescriptor
+    public class SaleOperationDescriptor : OperationDescriptor
     {
-        public SaleOperationDescriptor(ICollection<OperationalItem> items)
+        public SaleOperationDescriptor(IStore store, 
+            IUser user, 
+            ICollection<OperationalItem> items)
+            : base (store, user, items)
         {
-            this.Items = items;
         }
-
-        public ICollection<OperationalItem> Items { get; private set; }
     }
 }

@@ -4,20 +4,19 @@ namespace MyStore.Tests.Domain.Operations
     using MyStore.Domain.Nomenclatures;
     using MyStore.Domain.Operations;
     using System.Collections.Generic;
+    using MyStore.Tests.Utilities;
 
     public class OperationsTests
     {
         [Test]
-        public void When_DeliveringItems_Expect_ToHaveThemInStock()
+        public void When_DeliverItems_Expect_ToHaveThemInStock()
         {
-            var storeCode = "Store02";
-            IStore store = new Store(storeCode);
-
-            var userCode = "Operator02";
-            var supplierCode = "Supplier02";
+            IUser user = NomenclatureEntityGenerator<User>.GenerateOne();;
+            IStore store = new Store("Store02");
+            ISupplier supplier = new Supplier("Supplier02");
 
             string[] itemCodes = new string[2] { "item501.5", "item404.4" };
-            var opManager = new OperationsManager<Delivery, DeliveryOperationDescriptor>(userCode, store);
+            
             var deliveredItems = new List<OperationalItem>()
                             {
                                 new OperationalItem()
@@ -37,36 +36,33 @@ namespace MyStore.Tests.Domain.Operations
                                     Currency = "BGN"
                                 }
                             };
-            var opDescriptor = new DeliveryOperationDescriptor(supplierCode, deliveredItems);
-            IActiveOperation operation = opManager.CreateOperation(opDescriptor);
-            var opCode = opManager.CommitOperation();
-        
-            Assert.NotNull(opCode);
+            var opDescriptor = new DeliveryOperationDescriptor(supplier, store, user, deliveredItems);
+            Operation delivery = new Delivery(opDescriptor);
+            
+            delivery.UpdateStore();
+
             Assert.AreEqual(120, store.CheckAvailability(itemCodes[0]));
             Assert.AreEqual(50, store.CheckAvailability(itemCodes[1]));
         }
 
         [Test]
-        public void When_SaleItems_Expect_DecreasedQttiesInStore()
+        public void When_Sale_Expect_DecreasedQttiesInStore()
         {
-            var userCode = "Operator02";
-            var storeCode = "Store02";
-            IStore store = new Store(storeCode);
+            IUser user = NomenclatureEntityGenerator<User>.GenerateOne();;
+            IStore store = new Store("Store02");
 
             string[] itemCodes = new string[2] { "item501.5", "item404.4" };
 
             store.AddToWarehouse(itemCodes[0], 100);
             store.AddToWarehouse(itemCodes[1], 100);        
-
             
-            var opManager = new OperationsManager<Sale, SaleOperationDescriptor>(userCode, store);
-            var soldItems = new List<OperationalItem>()
+            var itemsForSale = new List<OperationalItem>()
                             {
                                 new OperationalItem()
                                 {
                                     Code = itemCodes[0],
                                     Qtty = 2,
-                                    Measure = Measure.Qtty, // To do: measurement based on strategy
+                                    Measure = Measure.Qtty, 
                                     Price = 0.75m,
                                     Currency = "BGN"
                                 },
@@ -80,13 +76,36 @@ namespace MyStore.Tests.Domain.Operations
                                 }
                             };
 
-            var opDescriptor = new SaleOperationDescriptor(soldItems);
-            IActiveOperation operation = opManager.CreateOperation(opDescriptor);
-            var opCode = opManager.CommitOperation();
+            IOperationDescriptor opDescriptor = new SaleOperationDescriptor(store, user, itemsForSale);
+            var sale = new Sale(opDescriptor);
+
+            sale.UpdateStore();
         
-            Assert.NotNull(opCode);
             Assert.AreEqual(98, store.CheckAvailability(itemCodes[0]));
             Assert.AreEqual(96, store.CheckAvailability(itemCodes[1]));
         }
+
+    //     [Test]
+    //     public void When_MakeSalesOperations_Expect_ToBePersisted()
+    //     {
+    //         // To do: Add 3 Sale operations
+
+    //         IOperationDescriptor opDescriptor = new SaleOperationDescriptor(store, user, itemsForSale);
+    //         var sale = new Sale(opDescriptor);
+    //         var persistenceManager = new PersistenceManager();
+    //         var reportManager = new ReportManager();
+
+            
+    //         sale.UpdateStore();
+
+    //         // Issue transaction about: 
+    //         // 1. The sale operation and: 
+    //         // 2. Associated payment; 
+    //         // 3. The changes in the warehouse;
+    //         var opCode = persistenceManager.Commit(sale); 
+
+    //         Assert.NotNull(opCode);
+    //         Assert.AreEqual(3, reportManager.GetOperations(typeof(Sale)));
+    //     }
     }
 }

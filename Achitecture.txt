@@ -1,0 +1,17 @@
+1. Architecture Layers:
+
+* Frontend - > SPA (Angular);
+* Backend - > Rest service -> (ASP.NET Web API);
+* API Service layer -> C# (??)
+* Domain Layer (Business logic) -> C#;
+* Data access layer (Persistance Layer) - > EF Core + Repositories ??;
+* Database -> 
+    - MSSQL
+    - Cosmos DB
+    - Flat files 
+    - In memory db for prototype;
+
+
+2. The link between `Domain Layer` and `Data access layer` (EF Core Persistance Layer)
+IUnitOfWork.Commit()
+IRepository<TEntity>.Fetch()
